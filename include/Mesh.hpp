@@ -48,8 +48,9 @@ public:
         other.indices = nullptr;
         other.animVertices = nullptr;
         other.animNormals = nullptr;
-        other.boneIds = nullptr;
+        other.boneIndices = nullptr;
         other.boneWeights = nullptr;
+        other.boneCount = 0;
         other.vaoId = 0;
         other.vboId = nullptr;
     }
@@ -73,8 +74,9 @@ public:
         other.indices = nullptr;
         other.animVertices = nullptr;
         other.animNormals = nullptr;
-        other.boneIds = nullptr;
+        other.boneIndices = nullptr;
         other.boneWeights = nullptr;
+        other.boneCount = 0;
         other.vaoId = 0;
         other.vboId = nullptr;
 

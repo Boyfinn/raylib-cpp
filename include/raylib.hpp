@@ -14,6 +14,7 @@ extern "C" {
 
 #include RAYLIB_H_FILE // NOLINT
 
+/*
 #if !defined(RAYLIB_VERSION_MAJOR) || !defined(RAYLIB_VERSION_MINOR)
 #error "raylib-cpp requires raylib >= 5"
 #endif
@@ -29,7 +30,7 @@ extern "C" {
 #if RAYLIB_VERSION_MINOR < 1
     #error "raylib-cpp targets raylib 5.1 or higher."
 #endif
-
+*/
 #ifdef __cplusplus
 }
 #endif

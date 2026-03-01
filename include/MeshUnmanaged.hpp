@@ -35,9 +35,8 @@ public:
         indices = nullptr;
         animVertices = nullptr;
         animNormals = nullptr;
-        boneIds = nullptr;
+        boneIndices = nullptr;
         boneWeights = nullptr;
-        boneMatrices = nullptr;
         boneCount = 0;
         vaoId = 0;
         vboId = nullptr;
@@ -130,7 +129,7 @@ public:
     GETTERSETTER(unsigned short*, Indices, indices) // NOLINT
     GETTERSETTER(float*, AnimVertices, animVertices)
     GETTERSETTER(float*, AnimNormals, animNormals)
-    GETTERSETTER(unsigned char*, BoneIds, boneIds)
+    GETTERSETTER(unsigned char*, BoneIndices, boneIndices)
     GETTERSETTER(float*, BoneWeights, boneWeights)
     GETTERSETTER(unsigned int, VaoId, vaoId)
     GETTERSETTER(unsigned int*, VboId, vboId)
@@ -228,7 +227,6 @@ public:
      * Returns whether or not the Mesh is valid.
      */
     bool IsValid() { return ::IsModelValid(*this); }
-
 protected:
     void set(const ::Mesh& mesh) {
         vertexCount = mesh.vertexCount;
@@ -242,9 +240,9 @@ protected:
         indices = mesh.indices;
         animVertices = mesh.animVertices;
         animNormals = mesh.animNormals;
-        boneIds = mesh.boneIds;
+        boneIndices = mesh.boneIndices;
         boneWeights = mesh.boneWeights;
-        boneMatrices = mesh.boneMatrices;
+        boneCount = mesh.boneCount;
         vaoId = mesh.vaoId;
         vboId = mesh.vboId;
     }

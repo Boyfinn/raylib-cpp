@@ -21,7 +21,7 @@ public:
     /*
      * Copy a model from another model.
      */
-    Model(const ::Model& model) : ::Model(model) { }
+    Model(const ::Model& model) : ::Model(model) {}
 
     /*
      * Load a model from a file.
@@ -58,9 +58,9 @@ public:
         other.meshes = nullptr;
         other.materials = nullptr;
         other.meshMaterial = nullptr;
-        other.boneCount = 0;
-        other.bones = nullptr;
-        other.bindPose = nullptr;
+        other.skeleton = {0};
+        other.currentPose = nullptr;
+        other.boneMatrices = nullptr;
     }
 
     GETTERSETTER(::Matrix, Transform, transform)
@@ -69,9 +69,12 @@ public:
     GETTERSETTER(::Mesh*, Meshes, meshes)
     GETTERSETTER(::Material*, Materials, materials)
     GETTERSETTER(int*, MeshMaterial, meshMaterial)
-    GETTERSETTER(int, BoneCount, boneCount)
-    GETTERSETTER(::BoneInfo*, Bones, bones)
-    GETTERSETTER(::Transform*, BindPose, bindPose)
+    GETTERSETTER(::ModelSkeleton, Skeleton, skeleton)
+    GETTERSETTER(::ModelAnimPose, CurrentPose, currentPose)
+    GETTERSETTER(::Matrix*, BoneMatrices, boneMatrices)
+    GETTERSETTER(int, BoneCount, skeleton.boneCount)
+    GETTERSETTER(::BoneInfo*, Bones, skeleton.bones)
+    GETTERSETTER(::Transform*, BindPose, skeleton.bindPose)
 
     Model& operator=(const ::Model& model) {
         set(model);
@@ -93,9 +96,9 @@ public:
         other.meshes = nullptr;
         other.materials = nullptr;
         other.meshMaterial = nullptr;
-        other.boneCount = 0;
-        other.bones = nullptr;
-        other.bindPose = nullptr;
+        other.skeleton = {0};
+        other.currentPose = nullptr;
+        other.boneMatrices = nullptr;
 
         return *this;
     }
@@ -129,16 +132,18 @@ public:
 
     /**
      * Update model animation pose
-     */
+
     Model& UpdateAnimationBones(const ::ModelAnimation& anim, int frame) {
         ::UpdateModelAnimationBones(*this, anim, frame);
         return *this;
-    }
+    } */
 
     /**
      * Check model animation skeleton match
      */
-    [[nodiscard]] bool IsModelAnimationValid(const ::ModelAnimation& anim) const { return ::IsModelAnimationValid(*this, anim); }
+    [[nodiscard]] bool IsModelAnimationValid(const ::ModelAnimation& anim) const {
+        return ::IsModelAnimationValid(*this, anim);
+    }
 
     /**
      * Draw a model (with texture if set)
@@ -188,7 +193,12 @@ public:
     /**
      * Draw a model as points
      */
-    void DrawPoints(::Vector3 position, ::Vector3 rotationAxis, float rotationAngle = 0.0f, ::Vector3 scale = {1.0f, 1.0f, 1.0f}, ::Color tint = {255, 255, 255, 255}) {
+    void DrawPoints(
+        ::Vector3 position,
+        ::Vector3 rotationAxis,
+        float rotationAngle = 0.0f,
+        ::Vector3 scale = {1.0f, 1.0f, 1.0f},
+        ::Color tint = {255, 255, 255, 255}) {
         ::DrawModelPointsEx(*this, position, rotationAxis, rotationAngle, scale, tint);
     }
 
@@ -240,9 +250,9 @@ protected:
         materials = model.materials;
         meshMaterial = model.meshMaterial;
 
-        boneCount = model.boneCount;
-        bones = model.bones;
-        bindPose = model.bindPose;
+        skeleton = model.skeleton;
+        currentPose = model.currentPose;
+        boneMatrices = model.boneMatrices;
     }
 };
 
