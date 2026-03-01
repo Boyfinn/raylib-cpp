@@ -37,7 +37,7 @@ public:
         std::vector<ModelAnimation> mats;
 
         if (modelAnimations != nullptr) {
-            mats.reserve(count);
+            mats.reserve(static_cast<size_t>(count)); // int->long unsigned int without casting makes me nervous
             for (int i = 0; i < count; i++) {
                 mats.emplace_back(modelAnimations[i]);
             }

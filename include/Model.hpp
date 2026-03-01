@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "./ModelSkeleton.hpp"
 #include "./RaylibException.hpp"
 #include "./raylib-cpp-utils.hpp"
 #include "./raylib.hpp"
@@ -58,7 +59,11 @@ public:
         other.meshes = nullptr;
         other.materials = nullptr;
         other.meshMaterial = nullptr;
-        other.skeleton = {0};
+        // TODO: this is now done here, but maybe a better pattern would be to handle this in the ModelSkeleton
+        // constructor?
+        other.skeleton.boneCount = 0;
+        other.skeleton.bones = nullptr;
+        other.skeleton.bindPose = nullptr;
         other.currentPose = nullptr;
         other.boneMatrices = nullptr;
     }
@@ -96,7 +101,9 @@ public:
         other.meshes = nullptr;
         other.materials = nullptr;
         other.meshMaterial = nullptr;
-        other.skeleton = {0};
+        other.skeleton.boneCount = 0;
+        other.skeleton.bones = nullptr;
+        other.skeleton.bindPose = nullptr;
         other.currentPose = nullptr;
         other.boneMatrices = nullptr;
 
@@ -125,7 +132,7 @@ public:
     /**
      * Update model animation pose
      */
-    Model& UpdateAnimation(const ::ModelAnimation& anim, int frame) {
+    Model& UpdateAnimation(const ::ModelAnimation& anim, float frame) {
         ::UpdateModelAnimation(*this, anim, frame);
         return *this;
     }

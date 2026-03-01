@@ -50,6 +50,7 @@
 #include "./Mesh.hpp"
 #include "./Model.hpp"
 #include "./ModelAnimation.hpp"
+#include "./ModelSkeleton.hpp"
 #include "./Mouse.hpp"
 #include "./Music.hpp"
 #include "./Ray.hpp"
